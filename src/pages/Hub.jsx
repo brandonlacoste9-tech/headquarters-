@@ -79,37 +79,62 @@ const Hub = () => {
         </button>
       </header>
 
-      {/* Hero */}
-      <div className="container" style={{ paddingTop: '6rem', paddingBottom: '6rem', textAlign: 'center' }}>
+      {/* Full Page Hero Poster */}
+      <div style={{ position: 'relative', width: '100%', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 4rem', overflow: 'hidden' }}>
+        {/* Glow effect behind the poster */}
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', height: '100%', background: 'radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, rgba(0,0,0,1) 80%)', zIndex: 0 }}></div>
         
-        <div className="animate-fade-in" style={{ marginBottom: '3rem', position: 'relative', display: 'inline-block' }}>
-          <div style={{ position: 'absolute', top: '-20%', left: '-20%', width: '140%', height: '140%', background: 'radial-gradient(circle, rgba(0,255,136,0.15) 0%, transparent 70%)', zIndex: -1, filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1400px', display: 'flex', justifyContent: 'center' }}>
           <img 
-            src="/assets/empire_hq.png" 
-            alt="Hell Yeah Games Inc. Headquarters" 
+            src="/assets/hub_poster.jpg" 
+            alt="Hell Yeah Games MVP Launch Preview" 
+            className="animate-fade-in"
             style={{ 
-              maxWidth: '600px', 
               width: '100%', 
+              maxHeight: '85vh',
+              objectFit: 'contain',
               borderRadius: '24px', 
-              boxShadow: '0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1)',
-              border: '2px solid rgba(255,255,255,0.05)'
+              boxShadow: '0 40px 100px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255,255,255,0.05)',
             }} 
           />
+          
+          {/* Real interactive CTA button overlapping the poster's fake button */}
+          <button 
+            className="btn animate-fade-in delay-2" 
+            style={{ 
+              position: 'absolute', 
+              bottom: '4%', 
+              right: '4%', 
+              background: 'linear-gradient(90deg, #00ff88, #00b3ff)',
+              color: '#000',
+              padding: '1.2rem 2.5rem', 
+              fontSize: '1.3rem', 
+              fontFamily: 'var(--font-heading)', 
+              fontWeight: 900,
+              textTransform: 'uppercase', 
+              letterSpacing: '2px', 
+              boxShadow: '0 0 40px rgba(0, 255, 136, 0.6)', 
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.8)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 0 40px rgba(0, 255, 136, 0.6)';
+            }}
+            onClick={() => alert("MVP Access Request Submitted! Queued for processing.")}
+          >
+            REQUEST MVP ACCESS
+          </button>
         </div>
+      </div>
 
-        <h1 className="animate-fade-in delay-1" style={{ fontFamily: 'var(--font-heading)', fontSize: '4rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '-2px' }}>
-          We Build <span className="text-gradient">Digital Empires.</span>
-        </h1>
-        
-        <div className="animate-fade-in delay-2" style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '900px', margin: '0 auto', marginBottom: '4rem', textAlign: 'center', lineHeight: 1.8 }}>
-          <p style={{ marginBottom: '1rem' }}>
-            <strong>Hell Yeah Games Inc.</strong> is a sprawling, multi-disciplinary technology conglomerate that builds premium digital infrastructure for the modern web.
-          </p>
-          <p>
-            What started as a dedicated haven for gamers has evolved into a monolithic tech empire spanning four massive pillars. Governed from a secure, centralized "God Mode" command center, we leverage a unified architecture to seamlessly funnel users across entertainment, finance, and engineering sectors.
-          </p>
-        </div>
-
+      <div className="container" style={{ paddingTop: '4rem', paddingBottom: '6rem', textAlign: 'center' }}>
         {/* The 4 Pillars */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', textAlign: 'left' }}>
           
