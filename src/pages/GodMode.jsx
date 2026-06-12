@@ -10,20 +10,11 @@ const GodMode = () => {
   const [stats, setStats] = useState({
     totalUsers: 0,
     proUsers: 0,
-    cryptoPortfolios: 0,
-    recentSignups: []
+    totalRevenue: 0,
+    activeTrials: 0,
+    recentSignups: [],
+    chartData: []
   });
-
-  // Mock data for the chart to make it look alive
-  const mockChartData = [
-    { name: 'Mon', active: 120, signups: 40 },
-    { name: 'Tue', active: 180, signups: 65 },
-    { name: 'Wed', active: 250, signups: 80 },
-    { name: 'Thu', active: 210, signups: 55 },
-    { name: 'Fri', active: 390, signups: 120 },
-    { name: 'Sat', active: 480, signups: 160 },
-    { name: 'Sun', active: 520, signups: 210 },
-  ];
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -42,22 +33,51 @@ const GodMode = () => {
 
       // 2. Fetch Aggregates
       try {
-        const { count: totalUsers } = await supabase.from('profiles').select('*', { count: 'exact', head: true });
-        const { count: proUsers } = await supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('plan', 'PRO');
-        const { count: cryptoPortfolios } = await supabase.from('crypto_portfolio').select('*', { count: 'exact', head: true });
+        // Fetch all profiles to calculate stats locally (since it's a small dataset for now)
+        const { data: allProfiles } = await supabase.from('profiles').select('id, username, created_at, plan, trial_seconds_remaining');
         
-        const { data: recentSignups } = await supabase
-          .from('profiles')
-          .select('id, username, created_at, plan')
-          .order('created_at', { ascending: false })
-          .limit(8);
+        if (allProfiles) {
+          const totalUsers = allProfiles.length;
+          const proUsers = allProfiles.filter(p => p.plan === 'pro' || p.plan === 'PRO').length;
+          const activeTrials = allProfiles.filter(p => p.plan !== 'pro' && p.plan !== 'PRO' && p.trial_seconds_remaining > 0).length;
+          const totalRevenue = proUsers * 8; // Assuming $8/mo for PRO
 
-        setStats({
-          totalUsers: totalUsers || 0,
-          proUsers: proUsers || 0,
-          cryptoPortfolios: cryptoPortfolios || 0,
-          recentSignups: recentSignups || []
-        });
+          // Calculate chart data for the last 7 days
+          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+          const today = new Date();
+          const chartData = [];
+          
+          for (let i = 6; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+            d.setHours(0, 0, 0, 0);
+            const nextDay = new Date(d);
+            nextDay.setDate(nextDay.getDate() + 1);
+
+            // Count users created on this day
+            const signupsOnDay = allProfiles.filter(p => {
+              const createdDate = new Date(p.created_at);
+              return createdDate >= d && createdDate < nextDay;
+            }).length;
+
+            chartData.push({
+              name: i === 0 ? 'Today' : days[d.getDay()],
+              signups: signupsOnDay,
+              active: signupsOnDay * 2 // Fake active multiplier just so the chart isn't completely flat, but signups are 100% real!
+            });
+          }
+
+          const recentSignups = [...allProfiles].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 8);
+
+          setStats({
+            totalUsers,
+            proUsers,
+            totalRevenue,
+            activeTrials,
+            recentSignups,
+            chartData
+          });
+        }
       } catch (err) {
         console.error("Error fetching admin stats", err);
       }
@@ -113,8 +133,8 @@ const GodMode = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
           <StatCard title="Total Empire Users" value={stats.totalUsers} icon={<Users size={20} color="#00ff88" />} color="#00ff88" />
           <StatCard title="Premium Subscribers" value={stats.proUsers} icon={<CreditCard size={20} color="#ffb300" />} color="#ffb300" />
-          <StatCard title="Active Portfolios" value={stats.cryptoPortfolios} icon={<Database size={20} color="#00b3ff" />} color="#00b3ff" />
-          <StatCard title="Server Health" value="99.9%" icon={<Activity size={20} color="#ff00ff" />} color="#ff00ff" />
+          <StatCard title="Total MRR (Revenue)" value={`$${stats.totalRevenue}`} icon={<Database size={20} color="#00b3ff" />} color="#00b3ff" />
+          <StatCard title="Active Trials" value={stats.activeTrials} icon={<Activity size={20} color="#ff00ff" />} color="#ff00ff" />
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
@@ -122,11 +142,11 @@ const GodMode = () => {
           {/* Chart */}
           <div className="glass-panel" style={{ padding: '2rem' }}>
             <h3 style={{ fontFamily: 'var(--font-heading)', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Activity size={20} color="#00ff88" /> Growth Velocity (7 Days)
+              <Activity size={20} color="#00ff88" /> Signups (Last 7 Days)
             </h3>
             <div style={{ height: '350px' }}>
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={mockChartData}>
+                <AreaChart data={stats.chartData}>
                   <defs>
                     <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#00ff88" stopOpacity={0.3}/>
@@ -139,9 +159,8 @@ const GodMode = () => {
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                   <XAxis dataKey="name" stroke="var(--text-muted)" />
-                  <YAxis stroke="var(--text-muted)" />
+                  <YAxis stroke="var(--text-muted)" allowDecimals={false} />
                   <Tooltip contentStyle={{ background: '#0a0a14', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }} />
-                  <Area type="monotone" dataKey="active" stroke="#00ff88" fillOpacity={1} fill="url(#colorActive)" strokeWidth={3} />
                   <Area type="monotone" dataKey="signups" stroke="#00b3ff" fillOpacity={1} fill="url(#colorSignups)" strokeWidth={3} />
                 </AreaChart>
               </ResponsiveContainer>
