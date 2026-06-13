@@ -188,6 +188,15 @@ const Hub = () => {
             delay="delay-3"
           />
 
+          <PlatformCard 
+            title="Gamer News"
+            description="World-class digital journalism seamlessly integrated with interactive HTML5 gaming experiences."
+            url="http://localhost:5178" 
+            banner="/assets/hub_poster.jpg"
+            color="#e63946"
+            delay="delay-3"
+          />
+
         </div>
 
         {/* Global Infrastructure Section */}
