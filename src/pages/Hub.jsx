@@ -69,14 +69,19 @@ const Hub = () => {
           <div style={{ width: '40px', height: '40px', background: 'var(--hub-gradient)', borderRadius: '8px' }}></div>
           <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '1.5rem', letterSpacing: '1px' }}>HELL YEAH GAMES INC.</span>
         </div>
-        <button 
-          onClick={() => navigate('/admin')}
-          style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', opacity: 0.5 }}
-          onMouseEnter={(e) => e.target.style.opacity = 1}
-          onMouseLeave={(e) => e.target.style.opacity = 0.5}
-        >
-          [God Mode]
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <a href="http://localhost:5173/pricing" style={{ color: '#00ff88', textDecoration: 'none', fontFamily: 'var(--font-heading)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', border: '1px solid #00ff88', padding: '0.4rem 1rem', borderRadius: '4px' }}>
+            👑 Go Pro
+          </a>
+          <button 
+            onClick={() => navigate('/admin')}
+            style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', opacity: 0.5 }}
+            onMouseEnter={(e) => e.target.style.opacity = 1}
+            onMouseLeave={(e) => e.target.style.opacity = 0.5}
+          >
+            [God Mode]
+          </button>
+        </div>
       </header>
 
       {/* Full Page Hero Poster */}
@@ -174,6 +179,15 @@ const Hub = () => {
             delay="delay-3"
           />
 
+          <PlatformCard 
+            title="Gamer Gurls"
+            description="The ultimate girl-power gaming network featuring dress up, simulation, and puzzle games with a Y2K aesthetic."
+            url="http://localhost:5177" 
+            banner="/assets/banner_gamergurls.jpg"
+            color="#ff1493"
+            delay="delay-3"
+          />
+
         </div>
 
         {/* Global Infrastructure Section */}
@@ -260,6 +274,7 @@ const Hub = () => {
             <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>The Arcade</a>
             <a href="http://localhost:5174" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Kryptotrac</a>
             <a href="http://localhost:5175" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Iron Claw</a>
+            <a href="http://localhost:5177" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Gamer Gurls</a>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

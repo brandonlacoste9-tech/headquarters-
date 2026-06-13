@@ -113,3 +113,23 @@ a {
   background: rgba(255,255,255,0.05);
   border-color: rgba(255,255,255,0.2);
 }
+
+/* Konami Glitch Effect */
+@keyframes globalGlitch {
+  0% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
+  10% { filter: invert(1) hue-rotate(180deg); transform: translate(-10px, 10px); }
+  20% { filter: invert(0) hue-rotate(0deg); transform: translate(10px, -10px); }
+  30% { transform: scale(1.05) skew(10deg); opacity: 0.8; }
+  40% { transform: scale(1) skew(0deg); filter: contrast(200%); opacity: 1; }
+  50% { filter: invert(1) blur(5px); transform: translate(-20px, 0); }
+  60% { filter: invert(0) blur(0); transform: translate(20px, 0); }
+  70% { transform: scale(0.9); opacity: 0.5; }
+  80% { transform: scale(1.1); opacity: 1; filter: sepia(100%) hue-rotate(90deg); }
+  90% { filter: none; transform: translate(0, 10px); }
+  100% { filter: none; transform: translate(0); }
+}
+
+.glitch-active {
+  animation: globalGlitch 0.2s infinite;
+  pointer-events: none;
+}
