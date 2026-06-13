@@ -70,7 +70,7 @@ const Hub = () => {
           <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '1.5rem', letterSpacing: '1px' }}>HELL YEAH GAMES INC.</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <a href="http://localhost:5173/pricing" style={{ color: '#00ff88', textDecoration: 'none', fontFamily: 'var(--font-heading)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', border: '1px solid #00ff88', padding: '0.4rem 1rem', borderRadius: '4px' }}>
+          <a href={`${import.meta.env.VITE_ARCADE_URL || 'http://localhost:5173'}/pricing`} style={{ color: '#00ff88', textDecoration: 'none', fontFamily: 'var(--font-heading)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', border: '1px solid #00ff88', padding: '0.4rem 1rem', borderRadius: '4px' }}>
             👑 Go Pro
           </a>
           <button 
@@ -155,7 +155,7 @@ const Hub = () => {
           <PlatformCard 
             title="The Arcade"
             description="Our flagship premium gaming subscription service. 800+ ad-free HTML5 games available everywhere."
-            url="http://localhost:5173" 
+            url={import.meta.env.VITE_ARCADE_URL || "http://localhost:5173"} 
             banner="/assets/banner_cyborg.jpg"
             color="var(--arcade-color)"
             delay="delay-1"
@@ -271,7 +271,7 @@ const Hub = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Platforms</h4>
             <a href="https://hellyeah-games.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Hell Yeah Games</a>
-            <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>The Arcade</a>
+            <a href={import.meta.env.VITE_ARCADE_URL || "http://localhost:5173"} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>The Arcade</a>
             <a href="http://localhost:5174" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Kryptotrac</a>
             <a href="http://localhost:5175" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Iron Claw</a>
             <a href="http://localhost:5177" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Gamer Gurls</a>
