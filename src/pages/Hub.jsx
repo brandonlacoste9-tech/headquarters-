@@ -3,9 +3,11 @@ import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Serv
 import { useNavigate, Link } from 'react-router-dom';
 import EmpireAnalytics from '../components/EmpireAnalytics';
 import { supabase } from '../supabase';
+import { useAuth } from '../context/AuthContext';
 
 const Hub = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [email, setEmail] = useState('');
   const [waitlistStatus, setWaitlistStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
 
@@ -104,6 +106,17 @@ const Hub = () => {
           <a href={`${import.meta.env.VITE_ARCADE_URL || 'http://localhost:5173'}/pricing`} style={{ color: '#00ff88', textDecoration: 'none', fontFamily: 'var(--font-heading)', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', border: '1px solid #00ff88', padding: '0.4rem 1rem', borderRadius: '4px' }}>
             👑 Go Pro
           </a>
+          
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,255,136,0.1)', border: '1px solid rgba(0,255,136,0.3)', padding: '0.4rem 1rem', borderRadius: '2rem', color: '#00ff88', fontSize: '0.9rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)' }}>
+              <Shield size={16} /> EMPIRE PASSPORT ACTIVE
+            </div>
+          ) : (
+            <Link to="/login" style={{ background: '#fff', color: '#000', padding: '0.5rem 1.5rem', borderRadius: '2rem', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', fontFamily: 'var(--font-heading)', textTransform: 'uppercase' }}>
+              Empire Login
+            </Link>
+          )}
+
           <button 
             onClick={() => navigate('/admin')}
             style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', opacity: 0.5 }}

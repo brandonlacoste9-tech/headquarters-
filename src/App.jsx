@@ -13,6 +13,7 @@ import useKonamiCode from './hooks/useKonamiCode';
 import SecretGame from './components/SecretGame';
 import NetworkBar from './components/NetworkBar';
 import Terminal from './pages/Terminal';
+import EmpireLogin from './pages/EmpireLogin';
 
 function App() {
   const isKonamiUnlocked = useKonamiCode();
@@ -46,9 +47,10 @@ function App() {
           <Route path="/" element={<Hub />} />
           <Route path="/terminal" element={<Terminal />} />
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/godmode" element={<GodMode />} />
+          <Route path="/god-mode" element={<GodMode />} />
+          <Route path="/login" element={<EmpireLogin />} />
+          <Route path="/about-us" element={<AboutUs />} />
           
-          <Route path="/about" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/investors" element={<InvestorRelations />} />
           <Route path="/press" element={<PressMedia />} />
