@@ -96,15 +96,14 @@ const Hub = () => {
         {/* Glow effect behind the poster */}
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', height: '100%', background: 'radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, rgba(0,0,0,1) 80%)', zIndex: 0 }}></div>
         
-        <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1400px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1800px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img 
             src="/assets/hub_poster.jpg" 
             alt="Hell Yeah Games MVP Launch Preview" 
             className="animate-fade-in"
             style={{ 
               width: '100%', 
-              maxHeight: '85vh',
-              objectFit: 'contain',
+              height: 'auto',
               borderRadius: '24px', 
               boxShadow: '0 40px 100px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255,255,255,0.05)',
             }} 
