@@ -36,7 +36,7 @@ const Careers = () => {
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#00ff88' }}><DollarSign size={14} /> {job.salary}</span>
               </div>
             </div>
-            <button className="btn btn-outline" style={{ borderColor: '#ff2a2a', color: '#ff2a2a' }}>Submit DNA Sample</button>
+            <button onClick={() => alert("DNA processing module offline. Please mail a vial of blood to P.O. Box 666.")} className="btn btn-outline" style={{ borderColor: '#ff2a2a', color: '#ff2a2a' }}>Submit DNA Sample</button>
           </div>
         ))}
       </div>

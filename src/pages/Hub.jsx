@@ -60,13 +60,20 @@ const Hub = () => {
     </a>
   );
 
+  // Production URL Environment Variables (with localhost fallbacks for dev)
+  const arcadeUrl = import.meta.env.VITE_ARCADE_URL || "http://localhost:5173";
+  const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "http://localhost:5174";
+  const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "http://localhost:5175";
+  const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "http://localhost:5176";
+  const gamerNewsUrl = import.meta.env.VITE_GAMER_NEWS_URL || "http://localhost:5178";
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* Header */}
       <header style={{ padding: '2rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ width: '40px', height: '40px', background: 'var(--hub-gradient)', borderRadius: '8px' }}></div>
+          <img src="/assets/headquarters_logo.png" alt="Headquarters Logo" style={{ height: '50px', borderRadius: '8px' }} />
           <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, fontSize: '1.5rem', letterSpacing: '1px' }}>HELL YEAH GAMES INC.</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
@@ -108,29 +115,29 @@ const Hub = () => {
             className="btn animate-fade-in delay-2" 
             style={{ 
               position: 'absolute', 
-              bottom: '4%', 
-              right: '4%', 
+              bottom: '5%', 
+              right: '25%', 
               background: 'linear-gradient(90deg, #00ff88, #00b3ff)',
               color: '#000',
-              padding: '1.2rem 2.5rem', 
-              fontSize: '1.3rem', 
+              padding: '1.5rem 3rem', 
+              fontSize: '1.5rem', 
               fontFamily: 'var(--font-heading)', 
               fontWeight: 900,
               textTransform: 'uppercase', 
-              letterSpacing: '2px', 
-              boxShadow: '0 0 40px rgba(0, 255, 136, 0.6)', 
-              border: 'none',
-              borderRadius: '8px',
+              letterSpacing: '3px', 
+              boxShadow: '0 0 60px rgba(0, 255, 136, 0.8), inset 0 0 10px rgba(255,255,255,0.5)', 
+              border: '2px solid rgba(255,255,255,0.8)',
+              borderRadius: '12px',
               cursor: 'pointer',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+              transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.8)';
+              e.currentTarget.style.transform = 'scale(1.1) translateY(-5px)';
+              e.currentTarget.style.boxShadow = '0 0 80px rgba(0, 255, 136, 1), inset 0 0 20px rgba(255,255,255,0.8)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.boxShadow = '0 0 40px rgba(0, 255, 136, 0.6)';
+              e.currentTarget.style.transform = 'scale(1) translateY(0)';
+              e.currentTarget.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.8), inset 0 0 10px rgba(255,255,255,0.5)';
             }}
             onClick={() => alert("MVP Access Request Submitted! Queued for processing.")}
           >
@@ -164,8 +171,8 @@ const Hub = () => {
           <PlatformCard 
             title="Kryptotrac"
             description="Real-time cryptocurrency analytics, live charts, and secure portfolio tracking dashboard."
-            url="http://localhost:5174" 
-            banner="/assets/banner_kryptotrac.jpg"
+            url={kryptotracUrl} 
+            banner="/assets/banner_kryptotrac.png"
             color="var(--krypto-color)"
             delay="delay-2"
           />
@@ -173,8 +180,8 @@ const Hub = () => {
           <PlatformCard 
             title="Iron Claw"
             description="The ultimate Hacker Core developer suite. 20 client-side utilities including networking and cryptography."
-            url="http://localhost:5175" 
-            banner="/assets/banner_ironclaw.jpg"
+            url={ironClawUrl} 
+            banner="/assets/banner_ironclaw.png"
             color="var(--iron-color)"
             delay="delay-3"
           />
@@ -182,7 +189,7 @@ const Hub = () => {
           <PlatformCard 
             title="Gamer Gurls"
             description="The ultimate girl-power gaming network featuring dress up, simulation, and puzzle games with a Y2K aesthetic."
-            url="http://localhost:5177" 
+            url={gamerGurlsUrl} 
             banner="/assets/banner_gamergurls.jpg"
             color="#ff1493"
             delay="delay-3"
@@ -191,7 +198,7 @@ const Hub = () => {
           <PlatformCard 
             title="Gamer News"
             description="World-class digital journalism seamlessly integrated with interactive HTML5 gaming experiences."
-            url="http://localhost:5178" 
+            url={gamerNewsUrl} 
             banner="/assets/hub_poster.jpg"
             color="#e63946"
             delay="delay-3"

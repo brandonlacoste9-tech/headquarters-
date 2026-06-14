@@ -35,7 +35,7 @@ const PressMedia = () => {
             <h2 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '1rem', lineHeight: 1.3 }}>{article.title}</h2>
             <p style={{ color: 'var(--text-secondary)' }}>"This strategic move further solidifies our monopoly on digital entertainment and finance," stated the CEO from an undisclosed location.</p>
             <div style={{ marginTop: '1.5rem' }}>
-              <a href="#" style={{ color: 'var(--iron-color)', fontWeight: 'bold', textDecoration: 'none' }}>Read Full Press Release →</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); alert("Error 404: The truth has been redacted by corporate legal."); }} style={{ color: 'var(--iron-color)', fontWeight: 'bold', textDecoration: 'none' }}>Read Full Press Release →</a>
             </div>
           </div>
         ))}
