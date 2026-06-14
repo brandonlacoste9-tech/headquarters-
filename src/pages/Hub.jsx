@@ -196,10 +196,10 @@ const Hub = () => {
           />
 
           <PlatformCard 
-            title="Gamer News"
+            title="Hacker Media"
             description="World-class digital journalism seamlessly integrated with interactive HTML5 gaming experiences."
             url={gamerNewsUrl} 
-            banner="/assets/hub_poster.jpg"
+            banner="/assets/banner_hackermedia.jpg"
             color="#e63946"
             delay="delay-3"
           />
