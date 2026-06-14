@@ -172,7 +172,7 @@ const Hub = () => {
             title="Kryptotrac"
             description="Real-time cryptocurrency analytics, live charts, and secure portfolio tracking dashboard."
             url={kryptotracUrl} 
-            banner="/assets/banner_kryptotrac.png"
+            banner="/assets/banner_kryptotrac.jpg"
             color="var(--krypto-color)"
             delay="delay-2"
           />
