@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Server, Shield, Cpu, Activity, Briefcase } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import EmpireAnalytics from '../components/EmpireAnalytics';
 import { supabase } from '../supabase';
 

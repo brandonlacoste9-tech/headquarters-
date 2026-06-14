@@ -107,7 +107,7 @@ const Terminal = () => {
         ))}
         
         <form onSubmit={handleCommand} style={{ display: 'flex', marginTop: '1rem' }}>
-          <span style={{ marginRight: '0.5rem' }}>></span>
+          <span style={{ marginRight: '0.5rem' }}>{'>'}</span>
           <input
             type="text"
             value={input}
