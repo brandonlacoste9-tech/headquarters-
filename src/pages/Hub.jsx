@@ -181,7 +181,7 @@ const Hub = () => {
             title="Iron Claw"
             description="The ultimate Hacker Core developer suite. 20 client-side utilities including networking and cryptography."
             url={ironClawUrl} 
-            banner="/assets/banner_ironclaw.png"
+            banner="/assets/banner_ironclaw.jpg"
             color="var(--iron-color)"
             delay="delay-3"
           />
