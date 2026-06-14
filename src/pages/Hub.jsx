@@ -65,7 +65,7 @@ const Hub = () => {
   const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "http://localhost:5174";
   const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "http://localhost:5175";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "http://localhost:5176";
-  const gamerNewsUrl = import.meta.env.VITE_GAMER_NEWS_URL || "http://localhost:5178";
+  const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.ca";
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -198,7 +198,7 @@ const Hub = () => {
           <PlatformCard 
             title="Hacker Media"
             description="World-class digital journalism seamlessly integrated with interactive HTML5 gaming experiences."
-            url={gamerNewsUrl} 
+            url={hackerMediaUrl} 
             banner="/assets/banner_hackermedia.jpg"
             color="#e63946"
             delay="delay-3"
