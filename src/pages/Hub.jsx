@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Server, Shield, Cpu, Activity, Briefcase } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import EmpireAnalytics from '../components/EmpireAnalytics';
+import { supabase } from '../supabase';
 
 const Hub = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [waitlistStatus, setWaitlistStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
+
+  const handleWaitlistSubmit = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setWaitlistStatus('loading');
+    
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email: email, source: 'headquarters' }]);
+
+      if (error) throw error;
+      setWaitlistStatus('success');
+      setEmail('');
+    } catch (error) {
+      console.error('Error joining waitlist:', error);
+      setWaitlistStatus('error');
+    }
+  };
 
   const PlatformCard = ({ title, description, url, banner, color, delay }) => (
     <a 
@@ -109,41 +135,74 @@ const Hub = () => {
             }} 
           />
           
-          {/* Real interactive CTA button overlapping the poster's fake button */}
-          <button 
-            className="btn animate-fade-in delay-2" 
-            style={{ 
-              position: 'absolute', 
-              bottom: '5%', 
-              right: '25%', 
-              background: 'linear-gradient(90deg, #00ff88, #00b3ff)',
-              color: '#000',
-              padding: '1.5rem 3rem', 
-              fontSize: '1.5rem', 
-              fontFamily: 'var(--font-heading)', 
-              fontWeight: 900,
-              textTransform: 'uppercase', 
-              letterSpacing: '3px', 
-              boxShadow: '0 0 60px rgba(0, 255, 136, 0.8), inset 0 0 10px rgba(255,255,255,0.5)', 
-              border: '2px solid rgba(255,255,255,0.8)',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.1) translateY(-5px)';
-              e.currentTarget.style.boxShadow = '0 0 80px rgba(0, 255, 136, 1), inset 0 0 20px rgba(255,255,255,0.8)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1) translateY(0)';
-              e.currentTarget.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.8), inset 0 0 10px rgba(255,255,255,0.5)';
-            }}
-            onClick={() => alert("MVP Access Request Submitted! Queued for processing.")}
-          >
-            REQUEST MVP ACCESS
-          </button>
+          {/* Real interactive CTA form overlapping the poster's fake button */}
+          <div style={{
+            position: 'absolute', 
+            bottom: '4%', 
+            right: '25%', 
+            background: 'rgba(10, 10, 10, 0.8)',
+            backdropFilter: 'blur(10px)',
+            padding: '1.5rem',
+            borderRadius: '16px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            minWidth: '350px'
+          }}>
+            {waitlistStatus === 'success' ? (
+              <div style={{ color: '#00ff88', textAlign: 'center', fontWeight: 'bold', fontSize: '1.2rem', padding: '1rem' }}>
+                ✓ Access Request Logged.
+              </div>
+            ) : (
+              <>
+                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>JOIN THE ELITE WAITLIST</h3>
+                <form onSubmit={handleWaitlistSubmit} style={{ display: 'flex', gap: '0.5rem' }}>
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    style={{
+                      flex: 1,
+                      background: 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      padding: '0.8rem 1rem',
+                      borderRadius: '8px',
+                      color: '#fff',
+                      outline: 'none'
+                    }}
+                  />
+                  <button 
+                    type="submit"
+                    disabled={waitlistStatus === 'loading'}
+                    style={{ 
+                      background: 'linear-gradient(90deg, #00ff88, #00b3ff)',
+                      color: '#000',
+                      padding: '0.8rem 1.5rem', 
+                      fontFamily: 'var(--font-heading)', 
+                      fontWeight: 900,
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: waitlistStatus === 'loading' ? 'wait' : 'pointer',
+                      transition: 'transform 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  >
+                    {waitlistStatus === 'loading' ? 'SENDING...' : 'REQUEST'}
+                  </button>
+                </form>
+                {waitlistStatus === 'error' && <div style={{ color: '#ff2a2a', fontSize: '0.8rem' }}>Database connection offline. Error 404.</div>}
+              </>
+            )}
+          </div>
         </div>
       </div>
+
+      <EmpireAnalytics />
 
       <div className="container" style={{ paddingTop: '4rem', paddingBottom: '6rem', textAlign: 'center' }}>
         {/* The 4 Pillars */}
@@ -272,7 +331,7 @@ const Hub = () => {
 
       {/* Massive Corporate Footer */}
       <footer style={{ marginTop: 'auto', background: '#020205', padding: '6rem 4rem 2rem', borderTop: '1px solid var(--border-color)' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '4rem', marginBottom: '4rem' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '2fr repeat(4, 1fr)', gap: '4rem', marginBottom: '4rem' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
               <div style={{ width: '30px', height: '30px', background: 'var(--hub-gradient)', borderRadius: '6px' }}></div>
@@ -306,6 +365,12 @@ const Hub = () => {
             <Link to="/terms" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Terms of Service</Link>
             <Link to="/dpa" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Data Processing Agreement</Link>
             <Link to="/cookies" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Cookie Policy</Link>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Sysadmin</h4>
+            <Link to="/admin" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Admin Portal</Link>
+            <Link to="/terminal" style={{ color: 'var(--iron-color)', fontSize: '0.9rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Terminal size={14}/> Mainframe Access</Link>
+            <Link to="/godmode" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>God Mode</Link>
           </div>
         </div>
         

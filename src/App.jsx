@@ -11,6 +11,8 @@ import Legal from './pages/Legal';
 
 import useKonamiCode from './hooks/useKonamiCode';
 import SecretGame from './components/SecretGame';
+import NetworkBar from './components/NetworkBar';
+import Terminal from './pages/Terminal';
 
 function App() {
   const isKonamiUnlocked = useKonamiCode();
@@ -39,8 +41,10 @@ function App() {
   return (
     <div className={isGlitching ? 'glitch-active' : ''}>
       <BrowserRouter>
+        <NetworkBar />
         <Routes>
           <Route path="/" element={<Hub />} />
+          <Route path="/terminal" element={<Terminal />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/godmode" element={<GodMode />} />
           
