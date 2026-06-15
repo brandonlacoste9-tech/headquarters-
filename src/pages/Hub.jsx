@@ -10,6 +10,15 @@ const Hub = () => {
   const { user } = useAuth();
   const [email, setEmail] = useState('');
   const [waitlistStatus, setWaitlistStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
+  const [empirePoints, setEmpirePoints] = useState(0);
+
+  React.useEffect(() => {
+    if (user) {
+      supabase.from('profiles').select('empire_points').eq('id', user.id).single().then(({data}) => {
+        if (data) setEmpirePoints(data.empire_points || 0);
+      });
+    }
+  }, [user]);
 
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
@@ -108,8 +117,23 @@ const Hub = () => {
           </a>
           
           {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,255,136,0.1)', border: '1px solid rgba(0,255,136,0.3)', padding: '0.4rem 1rem', borderRadius: '2rem', color: '#00ff88', fontSize: '0.9rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)' }}>
-              <Shield size={16} /> EMPIRE PASSPORT ACTIVE
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-end' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,255,136,0.1)', border: '1px solid rgba(0,255,136,0.3)', padding: '0.4rem 1rem', borderRadius: '2rem', color: '#00ff88', fontSize: '0.9rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)' }}>
+                <Shield size={16} /> EMPIRE PASSPORT ACTIVE
+              </div>
+              <div style={{ background: 'rgba(0,0,0,0.5)', padding: '1rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.1)', textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <div style={{ color: '#00f3ff', fontWeight: 'bold', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><TrendingUp size={20}/> {empirePoints} Empire Points</div>
+                <div style={{ fontSize: '0.8rem', color: '#888', marginTop: '0.5rem' }}>Your Referral Link (500 pts / signup):</div>
+                <div 
+                  title="Click to copy!"
+                  onClick={() => {
+                    navigator.clipboard.writeText(`https://headquarters-hub.vercel.app?ref=${user.id}`);
+                    alert('Referral link copied to clipboard!');
+                  }}
+                  style={{ background: '#000', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid #333', fontSize: '0.75rem', fontFamily: 'monospace', color: '#00ff88', marginTop: '0.4rem', cursor: 'pointer', display: 'inline-block' }}>
+                  https://headquarters-hub.vercel.app?ref={user.id.substring(0,8)}...
+                </div>
+              </div>
             </div>
           ) : (
             <Link to="/login" style={{ background: '#fff', color: '#000', padding: '0.5rem 1.5rem', borderRadius: '2rem', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', fontFamily: 'var(--font-heading)', textTransform: 'uppercase' }}>

@@ -30,6 +30,18 @@ const EmpireLogin = () => {
           password,
         });
         if (error) throw error;
+
+        // Process any pending referrals
+        const ref = sessionStorage.getItem('empire_ref');
+        if (ref) {
+          try {
+            await supabase.rpc('process_referral', { referrer: ref });
+            sessionStorage.removeItem('empire_ref');
+          } catch (rpcError) {
+            console.error('Referral failed:', rpcError);
+          }
+        }
+
         navigate('/');
       }
     } catch (err) {

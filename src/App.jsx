@@ -22,6 +22,14 @@ function App() {
   const [showGame, setShowGame] = React.useState(false);
 
   React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      sessionStorage.setItem('empire_ref', ref);
+    }
+  }, []);
+
+  React.useEffect(() => {
     if (isKonamiUnlocked && !showGame) {
       setIsGlitching(true);
       // Glitch out for 2 seconds before showing the game
