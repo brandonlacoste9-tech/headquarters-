@@ -12,6 +12,7 @@ import Legal from './pages/Legal';
 import useKonamiCode from './hooks/useKonamiCode';
 import SecretGame from './components/SecretGame';
 import NetworkBar from './components/NetworkBar';
+import EmpireBar from './components/EmpireBar';
 import Terminal from './pages/Terminal';
 import EmpireLogin from './pages/EmpireLogin';
 
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <div className={isGlitching ? 'glitch-active' : ''}>
+      <EmpireBar />
       <BrowserRouter>
         <NetworkBar />
         <Routes>
