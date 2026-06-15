@@ -7,15 +7,17 @@
     "dev": "vite --port 5176",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "newsletter": "node bot/newsletter.cjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.108.1",
+    "@supabase/supabase-js": "^2.108.2",
     "lucide-react": "^1.18.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.17.0",
-    "recharts": "^3.8.1"
+    "recharts": "^3.8.1",
+    "resend": "^6.12.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
