@@ -19,8 +19,8 @@ const EmpireBar = () => {
       boxSizing: 'border-box'
     }}>
       <span style={{ color: '#666', fontWeight: 'bold', letterSpacing: '2px' }}>THE EMPIRE:</span>
-      <a href="https://cyborggames.com" style={{ color: '#00f3ff', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
-        <span>🤖</span> CYBORG GAMES
+      <a href="https://cyborggamers.com" style={{ color: '#00f3ff', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <span>🤖</span> CYBORG GAMERS
       </a>
       <a href="https://hellyeah-games.com" style={{ color: '#ff003c', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
         <span>🔥</span> HELL YEAH GAMES
