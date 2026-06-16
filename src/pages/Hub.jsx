@@ -98,7 +98,7 @@ const Hub = () => {
   // Production URL Environment Variables (with localhost fallbacks for dev)
   const arcadeUrl = import.meta.env.VITE_ARCADE_URL || "https://hellyeah-games.com";
   const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "https://gamergurls.com";
-  const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://ironclaw.ca";
+  const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://www.ironclaw.ca";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "https://kryptotrac.com";
   const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.ca";
 
