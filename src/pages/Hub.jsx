@@ -97,7 +97,7 @@ const Hub = () => {
 
   // Production URL Environment Variables (with localhost fallbacks for dev)
   const arcadeUrl = import.meta.env.VITE_ARCADE_URL || "https://hellyeah-games.com";
-  const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "https://gamer-gurls.com";
+  const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "https://gamergurls.com";
   const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://ironclaw.ca";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "https://kryptotrac.com";
   const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.ca";
@@ -246,7 +246,7 @@ const Hub = () => {
           <PlatformCard 
             title="Hell Yeah Games"
             description="The original gaming destination. Hundreds of free HTML5 games, action, arcade, and puzzle games to play instantly."
-            url="https://hellyeah-games-inc.com" 
+            url="https://hellyeah-games.com" 
             banner="/assets/banner_hellyeah.jpg"
             color="#ff8a00"
             delay="delay-1"
@@ -379,7 +379,7 @@ const Hub = () => {
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Platforms</h4>
-            <a href="https://hellyeah-games-inc.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Hell Yeah Games</a>
+            <a href="https://hellyeah-games.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Hell Yeah Games</a>
             <a href={arcadeUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>The Arcade</a>
             <a href={kryptotracUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Kryptotrac</a>
             <a href={ironClawUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Iron Claw</a>
