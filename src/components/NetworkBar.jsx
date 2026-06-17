@@ -2,7 +2,7 @@ import React from 'react';
 
 const NetworkBar = () => {
   const links = [
-    { name: "HQ", url: "http://localhost:5179" },
+    { name: "HQ", url: import.meta.env.VITE_HQ_URL || "https://www.hellyeahgames-headquarters.com" },
     { name: "Hell Yeah Games", url: import.meta.env.VITE_HELL_YEAH_URL || "https://hellyeah-games.com" },
     { name: "Cyborg Gamers", url: import.meta.env.VITE_CYBORG_URL || "https://cyborggamers.com" },
     { name: "Kryptotrac", url: import.meta.env.VITE_KRYPTOTRAC_URL || "https://www.kryptotrac.com" },

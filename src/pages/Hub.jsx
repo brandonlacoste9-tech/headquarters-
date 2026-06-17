@@ -128,11 +128,11 @@ const Hub = () => {
                 <div 
                   title="Click to copy!"
                   onClick={() => {
-                    navigator.clipboard.writeText(`https://headquarters-hub.vercel.app?ref=${user.id}`);
+                    navigator.clipboard.writeText(`https://www.hellyeahgames-headquarters.com?ref=${user.id}`);
                     alert('Referral link copied to clipboard!');
                   }}
                   style={{ background: '#000', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid #333', fontSize: '0.75rem', fontFamily: 'monospace', color: '#00ff88', marginTop: '0.4rem', cursor: 'pointer', display: 'inline-block' }}>
-                  https://headquarters-hub.vercel.app?ref={user.id.substring(0,8)}...
+                  https://www.hellyeahgames-headquarters.com?ref={user.id.substring(0,8)}...
                 </div>
               </div>
             </div>
