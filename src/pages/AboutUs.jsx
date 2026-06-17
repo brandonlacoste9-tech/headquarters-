@@ -1,40 +1,71 @@
+import { Building2, Globe2, Zap, Users, Rocket } from 'lucide-react';
+import PageHeader from '../components/PageHeader';
 
-import { ArrowLeft, Building2, Globe2, Zap } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+const pillars = [
+  {
+    icon: Building2,
+    color: '#ff2a2a',
+    title: 'Global HQ',
+    text: 'Headquartered in the digital underground — building the Empire one platform at a time.',
+  },
+  {
+    icon: Globe2,
+    color: '#00b3ff',
+    title: 'Network Scale',
+    text: 'Six live properties spanning gaming, crypto, dev tools, and media — all under one passport.',
+  },
+  {
+    icon: Zap,
+    color: '#00ff88',
+    title: 'Ship Fast',
+    text: 'From HTML5 arcade games to real-time charts — we launch before the pitch deck is finished.',
+  },
+];
 
-const AboutUs = () => {
-  const navigate = useNavigate();
+const milestones = [
+  { year: '2024', event: 'Hell Yeah Games arcade goes live with 100+ HTML5 titles.' },
+  { year: '2025', event: 'Cyborg Gamers subscription and Empire Passport unified auth ship.' },
+  { year: '2026', event: 'Headquarters hub launches — Kryptotrac, Iron Claw, and Hacker Media join the network.' },
+];
 
-  return (
-    <div className="page-shell">
-      <button onClick={() => navigate('/')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
-        <ArrowLeft size={16} /> Back to Hub
-      </button>
+const AboutUs = () => (
+  <div className="page-shell">
+    <PageHeader
+      eyebrow="Company"
+      title="About The"
+      titleAccent="Empire"
+      subtitle="Hell Yeah Games Inc. started as a gaming collective and grew into a multi-platform network — entertainment, finance, and developer tooling under one roof."
+    />
 
-      <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '4rem', marginBottom: '1rem', textTransform: 'uppercase' }}>About The <span className="text-gradient">Empire</span></h1>
-      <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', lineHeight: 1.8 }}>
-        Hell Yeah Games Inc. was forged in the digital fires of the early web. What began as a rogue collective of gamers and hackers has transformed into a globally recognized technology syndicate, pushing the absolute boundaries of digital entertainment, decentralized finance, and developer tooling.
-      </p>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <Building2 size={32} color="#ff2a2a" style={{ marginBottom: '1rem' }} />
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Global HQ</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Located in a subterranean, climate-controlled bunker beneath the Swiss Alps. We don't take walk-ins.</p>
+    <div className="corp-grid-3" style={{ marginBottom: '3rem' }}>
+      {pillars.map(({ icon: Icon, color, title, text }) => (
+        <div key={title} className="glass-panel corp-card animate-fade-in">
+          <Icon size={28} color={color} className="corp-card-icon" aria-hidden="true" />
+          <h3>{title}</h3>
+          <p>{text}</p>
         </div>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <Globe2 size={32} color="#00b3ff" />
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>10,000+ Employees</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Our engineers span 14 countries, working asynchronously in the dark to keep your servers running.</p>
-        </div>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <Zap size={32} color="#00ff88" />
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Zero Carbon</h3>
-          <p style={{ color: 'var(--text-muted)' }}>Our entire edge-network is powered entirely by the kinetic energy of our gamers aggressively clicking their mice.</p>
-        </div>
-      </div>
+      ))}
     </div>
-  );
-};
+
+    <h2 className="corp-section-title">Timeline</h2>
+    <div className="corp-list" style={{ marginBottom: '3rem' }}>
+      {milestones.map(({ year, event }) => (
+        <div key={year} className="glass-panel corp-card" style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-start' }}>
+          <span style={{ fontFamily: 'var(--font-heading)', color: 'var(--iron-color)', fontWeight: 800, fontSize: '1.1rem', flexShrink: 0 }}>{year}</span>
+          <p style={{ margin: 0 }}>{event}</p>
+        </div>
+      ))}
+    </div>
+
+    <div className="glass-panel corp-card" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Users size={32} color="var(--krypto-color)" aria-hidden="true" />
+      <div>
+        <h3 style={{ marginBottom: '0.35rem' }}>Join the Network</h3>
+        <p style={{ margin: 0 }}>Create an Empire Passport to earn referral points and access PRO features across every property.</p>
+      </div>
+      <Rocket size={24} color="var(--iron-color)" style={{ marginLeft: 'auto' }} aria-hidden="true" />
+    </div>
+  </div>
+);
 
 export default AboutUs;

@@ -1,50 +1,124 @@
+import { Scale } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import PageHeader from '../components/PageHeader';
 
-import { ArrowLeft, Scale } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+const LEGAL_TABS = [
+  { path: '/privacy', label: 'Privacy' },
+  { path: '/terms', label: 'Terms' },
+  { path: '/dpa', label: 'DPA' },
+  { path: '/cookies', label: 'Cookies' },
+];
+
+const LEGAL_CONTENT = {
+  '/privacy': {
+    title: 'Privacy Policy',
+    sections: [
+      {
+        heading: '1. Information We Collect',
+        body: 'When you create an Empire Passport, we collect your email address and account metadata. Waitlist signups store your email and signup source. We use Supabase for authentication and data storage.',
+      },
+      {
+        heading: '2. How We Use Data',
+        body: 'Account data is used to authenticate you across Empire network properties, process referrals, and display your Empire Points balance. We do not sell your personal information to third parties.',
+      },
+      {
+        heading: '3. Your Rights',
+        body: 'You may request deletion of your account and associated data by contacting us. You can opt out of marketing communications at any time.',
+      },
+    ],
+  },
+  '/terms': {
+    title: 'Terms of Service',
+    sections: [
+      {
+        heading: '1. Acceptance',
+        body: 'By using any Hell Yeah Games Inc. property — including Headquarters, Hell Yeah Games, Cyborg Gamers, Kryptotrac, Iron Claw, Gamer Gurls, or Hacker Media — you agree to these terms.',
+      },
+      {
+        heading: '2. Accounts',
+        body: 'You are responsible for maintaining the security of your Empire Passport credentials. One person per account. Abuse of the referral system may result in account suspension.',
+      },
+      {
+        heading: '3. Content & Conduct',
+        body: 'Do not use our platforms for illegal activity, harassment, or attempts to compromise our infrastructure. We reserve the right to terminate access for violations.',
+      },
+    ],
+  },
+  '/dpa': {
+    title: 'Data Processing Agreement',
+    sections: [
+      {
+        heading: '1. Scope',
+        body: 'This DPA applies to business customers who integrate with Empire network services and process personal data on behalf of end users.',
+      },
+      {
+        heading: '2. Sub-processors',
+        body: 'We use Supabase (database and auth), Resend (email delivery), and standard cloud hosting providers. A current sub-processor list is available on request.',
+      },
+      {
+        heading: '3. Security',
+        body: 'We implement row-level security on database tables, environment-based secret management, and role-based admin access for internal dashboards.',
+      },
+    ],
+  },
+  '/cookies': {
+    title: 'Cookie Policy',
+    sections: [
+      {
+        heading: '1. What We Use',
+        body: 'We use session storage for referral tracking (?ref= links) and Supabase auth tokens stored in local storage to keep you signed in. No third-party advertising cookies are deployed.',
+      },
+      {
+        heading: '2. Analytics',
+        body: 'We may add privacy-respecting analytics in the future. If we do, this policy will be updated and you will be notified.',
+      },
+      {
+        heading: '3. Managing Cookies',
+        body: 'Clearing your browser storage will sign you out and remove any pending referral codes. Most browsers let you control this in privacy settings.',
+      },
+    ],
+  },
+};
 
 const Legal = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const getTitle = () => {
-    if (location.pathname === '/privacy') return "Privacy Policy";
-    if (location.pathname === '/terms') return "Terms of Service";
-    if (location.pathname === '/dpa') return "Data Processing Agreement";
-    if (location.pathname === '/cookies') return "Cookie Policy";
-    return "Legal Documentation";
-  };
+  const content = LEGAL_CONTENT[location.pathname] || LEGAL_CONTENT['/privacy'];
 
   return (
     <div className="page-shell">
-      <button onClick={() => navigate('/')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
-        <ArrowLeft size={16} /> Back to Hub
-      </button>
+      <PageHeader
+        eyebrow="Legal"
+        title={content.title}
+        subtitle="Documentation governing use of Hell Yeah Games Inc. and Empire network properties."
+      />
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1rem' }}>
-        <Scale size={48} color="#666677" />
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', textTransform: 'uppercase', color: '#fff' }}>{getTitle()}</h1>
-      </div>
-      
-      <p style={{ color: 'var(--text-muted)', marginBottom: '4rem' }}>Last Updated: October 18, 2026</p>
+      <nav className="corp-legal-nav" aria-label="Legal documents">
+        {LEGAL_TABS.map(({ path, label }) => (
+          <Link
+            key={path}
+            to={path}
+            className={`corp-legal-tab ${location.pathname === path ? 'active' : ''}`}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
 
-      <div className="glass-panel" style={{ padding: '3rem', color: 'var(--text-secondary)', lineHeight: 2, fontFamily: 'serif', fontSize: '1.1rem' }}>
-        <h3 style={{ color: '#fff', fontFamily: 'sans-serif', marginBottom: '1rem' }}>1. Introduction</h3>
-        <p style={{ marginBottom: '2rem' }}>
-          By accessing any platform governed by Hell Yeah Games Inc. (hereinafter referred to as "The Empire"), you agree to surrender all digital sovereignty. The Empire reserves the right to log, monetize, and distribute your telemetry data across our proprietary neural networks. 
-        </p>
+      <p className="corp-updated">
+        <Scale size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 6 }} aria-hidden="true" />
+        Last updated: June 17, 2026
+      </p>
 
-        <h3 style={{ color: '#fff', fontFamily: 'sans-serif', marginBottom: '1rem' }}>2. Data Collection</h3>
-        <p style={{ marginBottom: '2rem' }}>
-          We collect everything. Keystrokes, mouse movements, crypto wallet balances, and your highest score in Space Explorer. If you think you're using an ad-blocker, we assure you, our edge-nodes have already bypassed it.
-        </p>
+      <div className="glass-panel corp-legal-doc">
+        {content.sections.map(({ heading, body }) => (
+          <section key={heading}>
+            <h3>{heading}</h3>
+            <p>{body}</p>
+          </section>
+        ))}
 
-        <h3 style={{ color: '#fff', fontFamily: 'sans-serif', marginBottom: '1rem' }}>3. Limitation of Liability</h3>
-        <p style={{ marginBottom: '2rem' }}>
-          Hell Yeah Games Inc. shall not be held liable for any loss of funds on Kryptotrac, syntax errors caused by Iron Claw, or severe gaming addiction resulting from The Arcade. Use our platforms at your own extreme peril.
-        </p>
-
-        <div style={{ padding: '2rem', background: 'rgba(255,42,42,0.1)', borderLeft: '4px solid #ff2a2a', marginTop: '3rem' }}>
-          <strong style={{ color: '#ff8a8a' }}>TL;DR:</strong> We own the servers, we make the rules. Welcome to the Empire.
+        <div className="corp-legal-callout">
+          <strong>Questions?</strong> Contact legal@hellyeahgames.com for policy inquiries or data requests.
         </div>
       </div>
     </div>

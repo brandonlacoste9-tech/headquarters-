@@ -1,45 +1,68 @@
-import { ArrowLeft, Megaphone } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Megaphone, ArrowRight } from 'lucide-react';
+import PageHeader from '../components/PageHeader';
+import { useToast } from '../hooks/useToast';
+
+const articles = [
+  {
+    date: 'Jun 2026',
+    title: 'Hell Yeah Games Headquarters Hub Launches as Empire Network Command Center',
+    source: 'Internal',
+    excerpt: 'The new HQ site unifies six properties under a single passport, referral system, and admin dashboard.',
+  },
+  {
+    date: 'May 2026',
+    title: 'Cyborg Gamers Subscription Hits 800+ Ad-Free HTML5 Games',
+    source: 'Gaming Weekly',
+    excerpt: 'The premium tier expands the Hell Yeah Games catalog with cross-platform access and PRO features.',
+  },
+  {
+    date: 'Apr 2026',
+    title: 'Iron Claw Developer Suite Adds 20 Client-Side Utilities',
+    source: 'DevOps Times',
+    excerpt: 'Networking, crypto, and encoding tools ship entirely in the browser — no backend required.',
+  },
+  {
+    date: 'Mar 2026',
+    title: 'Kryptotrac Launches Real-Time Crypto Analytics Dashboard',
+    source: 'Financial Herald',
+    excerpt: 'Live charts and portfolio tracking join the Empire network alongside gaming and media properties.',
+  },
+];
 
 const PressMedia = () => {
-  const navigate = useNavigate();
-
-  const articles = [
-    { date: 'Oct 14, 2026', title: 'Hell Yeah Games Inc. Acquires Prominent Web3 Startup for $400 Million in All-Cash Deal', source: 'The Tech Journal' },
-    { date: 'Sep 02, 2026', title: 'The Arcade Surpasses 10 Million Active Subscribers, Cementing Dominance in HTML5 Gaming', source: 'Gaming Weekly' },
-    { date: 'Aug 18, 2026', title: 'Iron Claw Named "Best Developer Tool of the Year" by Hacker Collective', source: 'DevOps Times' },
-    { date: 'Jul 04, 2026', title: 'Kryptotrac Processes Over $1 Trillion in Theoretical Volume During Q2', source: 'Financial Herald' },
-  ];
+  const { showToast } = useToast();
 
   return (
-    <div className="page-shell">
-      <button onClick={() => navigate('/')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
-        <ArrowLeft size={16} /> Back to Hub
-      </button>
+    <div className="page-shell page-shell-wide">
+      <PageHeader
+        eyebrow="Media"
+        title="Press &"
+        titleAccent="Media"
+        subtitle="Product launches, network updates, and announcements from Hell Yeah Games Inc. and the Empire."
+      />
 
-      <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '4rem', marginBottom: '1rem', textTransform: 'uppercase' }}>Press & <span className="text-gradient">Media</span></h1>
-      <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', lineHeight: 1.8 }}>
-        Stay up to date with the latest acquisitions, product launches, and hostile corporate takeovers from Hell Yeah Games Inc.
-      </p>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {articles.map((article, i) => (
-          <div key={i} className="glass-panel" style={{ padding: '2.5rem', borderLeft: '4px solid var(--iron-color)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
-              <Megaphone size={16} />
-              <span>{article.date}</span>
-              <span>•</span>
-              <span style={{ color: '#00b3ff' }}>{article.source}</span>
+      <div className="corp-list" style={{ gap: '1.25rem' }}>
+        {articles.map((article) => (
+          <article key={article.title} className="glass-panel corp-press-card">
+            <div className="corp-press-meta">
+              <Megaphone size={14} aria-hidden="true" />
+              <time>{article.date}</time>
+              <span aria-hidden="true">•</span>
+              <span className="corp-press-source">{article.source}</span>
             </div>
-            <h2 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '1rem', lineHeight: 1.3 }}>{article.title}</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>"This strategic move further solidifies our monopoly on digital entertainment and finance," stated the CEO from an undisclosed location.</p>
-            <div style={{ marginTop: '1.5rem' }}>
-              <a href="#" onClick={(e) => { e.preventDefault(); alert("Error 404: The truth has been redacted by corporate legal."); }} style={{ color: 'var(--iron-color)', fontWeight: 'bold', textDecoration: 'none' }}>Read Full Press Release →</a>
-            </div>
-          </div>
+            <h2 className="corp-press-title">{article.title}</h2>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.65, margin: 0 }}>{article.excerpt}</p>
+            <button
+              type="button"
+              className="corp-press-link"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+              onClick={() => showToast('Full press release coming soon.')}
+            >
+              Read release <ArrowRight size={14} aria-hidden="true" />
+            </button>
+          </article>
         ))}
       </div>
-
     </div>
   );
 };

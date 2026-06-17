@@ -689,10 +689,329 @@ img {
 
 /* Page shell for inner pages */
 .page-shell {
-  min-height: calc(100vh - var(--network-bar-height));
-  padding: 3rem 2rem 4rem;
-  max-width: 1000px;
+  min-height: calc(100vh - var(--sticky-offset));
+  padding: 2.5rem 2rem 4rem;
+  max-width: 1060px;
   margin: 0 auto;
+}
+
+.page-shell-wide {
+  max-width: 1140px;
+}
+
+/* Corporate pages */
+.corp-header {
+  margin-bottom: 3rem;
+}
+
+.corp-back {
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+.corp-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.corp-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.corp-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+.corp-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.corp-grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.corp-card {
+  padding: 1.75rem;
+}
+
+.corp-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+  color: #fff;
+}
+
+.corp-card p {
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.corp-card-icon {
+  margin-bottom: 1rem;
+}
+
+.corp-stat-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.corp-stat-value {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: #fff;
+}
+
+.corp-stat-delta {
+  color: var(--iron-color);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.corp-ticker {
+  padding: 1.25rem 1.75rem;
+  text-align: center;
+  min-width: 200px;
+}
+
+.corp-ticker-label {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.corp-ticker-price {
+  font-size: 1.75rem;
+  font-family: var(--font-heading);
+  color: var(--iron-color);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0.25rem 0;
+}
+
+.corp-ticker-change {
+  color: var(--iron-color);
+  font-size: 0.85rem;
+}
+
+.corp-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.corp-quote {
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.corp-quote p {
+  color: var(--text-secondary);
+  font-style: italic;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.corp-job-card {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.corp-job-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(255, 42, 42, 0.3);
+}
+
+.corp-job-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.corp-job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.corp-job-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.corp-job-salary {
+  color: var(--iron-color) !important;
+}
+
+.corp-press-card {
+  padding: 2rem;
+  border-left: 3px solid var(--iron-color);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.corp-press-card:hover {
+  transform: translateY(-2px);
+  border-left-color: var(--krypto-color);
+}
+
+.corp-press-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
+}
+
+.corp-press-source {
+  color: var(--krypto-color);
+  font-weight: 600;
+}
+
+.corp-press-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  color: #fff;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+}
+
+.corp-press-link {
+  color: var(--iron-color);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 1rem;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.corp-press-link:hover {
+  color: var(--krypto-color);
+  gap: 0.5rem;
+}
+
+.corp-legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.corp-legal-tab {
+  padding: 0.45rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.corp-legal-tab:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.corp-legal-tab.active {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--iron-color);
+  color: var(--iron-color);
+}
+
+.corp-legal-doc {
+  padding: 2.5rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.corp-legal-doc h3 {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+
+.corp-legal-doc h3:first-child {
+  margin-top: 0;
+}
+
+.corp-legal-doc p {
+  margin-bottom: 1.5rem;
+}
+
+.corp-legal-callout {
+  padding: 1.5rem;
+  background: rgba(255, 42, 42, 0.08);
+  border-left: 3px solid var(--arcade-color);
+  margin-top: 2rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.corp-legal-callout strong {
+  color: #ff8a8a;
+}
+
+.corp-count {
+  color: var(--text-muted);
+  font-size: 0.55em;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.corp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.corp-updated {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
 }
 
 /* Loader */
@@ -1235,6 +1554,15 @@ img {
 
   .godmode-chart {
     height: 260px;
+  }
+
+  .corp-header-main {
+    flex-direction: column;
+  }
+
+  .corp-job-card {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

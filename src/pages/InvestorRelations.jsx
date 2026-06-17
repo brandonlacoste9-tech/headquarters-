@@ -1,56 +1,65 @@
-import { ArrowLeft, TrendingUp } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { TrendingUp, FileText, Download } from 'lucide-react';
+import PageHeader from '../components/PageHeader';
+import { useToast } from '../hooks/useToast';
+
+const metrics = [
+  { label: 'Network Properties', value: '6', delta: 'Live platforms' },
+  { label: 'Empire Passports', value: 'Growing', delta: 'Unified auth' },
+  { label: 'PRO Subscribers', value: '$8/mo', delta: 'Per platform tier' },
+];
 
 const InvestorRelations = () => {
-  const navigate = useNavigate();
+  const { showToast } = useToast();
 
   return (
-    <div className="page-shell">
-      <button onClick={() => navigate('/')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
-        <ArrowLeft size={16} /> Back to Hub
-      </button>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '4rem', textTransform: 'uppercase' }}>Investor <span className="text-gradient">Relations</span></h1>
-        <div className="glass-panel" style={{ padding: '1rem 2rem', textAlign: 'center' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>NASDAQ: HYG</div>
-          <div style={{ fontSize: '2rem', fontFamily: 'var(--font-heading)', color: '#00ff88', fontWeight: 'bold' }}>$4,192.69 <TrendingUp size={20} /></div>
-          <div style={{ color: '#00ff88', fontSize: '0.9rem' }}>+42.0% (Today)</div>
+    <div className="page-shell page-shell-wide">
+      <PageHeader
+        eyebrow="Investors"
+        title="Investor"
+        titleAccent="Relations"
+        subtitle="Hell Yeah Games Inc. is a privately held company building a network of consumer and developer-facing digital products."
+      >
+        <div className="glass-panel corp-ticker">
+          <div className="corp-ticker-label">Status</div>
+          <div className="corp-ticker-price">
+            Private <TrendingUp size={18} aria-hidden="true" />
+          </div>
+          <div className="corp-ticker-change">Not publicly traded</div>
         </div>
+      </PageHeader>
+
+      <h2 className="corp-section-title">Network Overview</h2>
+      <div className="corp-grid-stats" style={{ marginBottom: '3rem' }}>
+        {metrics.map(({ label, value, delta }) => (
+          <div key={label} className="glass-panel corp-card">
+            <div className="corp-stat-label">{label}</div>
+            <div className="corp-stat-value">{value}</div>
+            <div className="corp-stat-delta">{delta}</div>
+          </div>
+        ))}
       </div>
 
-      <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', lineHeight: 1.8 }}>
-        Hell Yeah Games Inc. has consistently outperformed market expectations by ignoring basic economic principles and operating purely on vibes and high-frequency trading algorithms.
-      </p>
-
-      <h2 style={{ fontSize: '2rem', marginBottom: '2rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>Q3 2026 Earnings Report</h2>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '4rem' }}>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <div style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Gross Revenue</div>
-          <div style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', color: '#fff' }}>$1.4B</div>
-          <div style={{ color: '#00ff88' }}>+124% YoY</div>
-        </div>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <div style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>EBITDA</div>
-          <div style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', color: '#fff' }}>$890M</div>
-          <div style={{ color: '#00ff88' }}>+89% YoY</div>
-        </div>
-        <div className="glass-panel" style={{ padding: '2rem' }}>
-          <div style={{ color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Active Subscribers</div>
-          <div style={{ fontSize: '2.5rem', fontFamily: 'var(--font-heading)', color: '#fff' }}>14.2M</div>
-          <div style={{ color: '#00ff88' }}>+200% YoY</div>
-        </div>
-      </div>
-
-      <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center' }}>
-        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Letter to Shareholders</h3>
-        <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic', maxWidth: '600px', margin: '0 auto' }}>
-          "Dear Shareholders, we printed money this quarter. That is all. See you on the yacht." <br/><br/>
-          <strong>- The CEO</strong>
+      <div className="glass-panel corp-quote" style={{ marginBottom: '2rem' }}>
+        <FileText size={28} color="var(--krypto-color)" style={{ marginBottom: '1rem' }} aria-hidden="true" />
+        <h3 style={{ fontFamily: 'var(--font-heading)', color: '#fff', marginBottom: '1rem' }}>Investor Inquiries</h3>
+        <p>
+          We&apos;re focused on product growth across the Empire network. For partnership or investment inquiries,
+          reach out through our headquarters contact channels.
         </p>
       </div>
 
+      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          className="btn btn-outline"
+          onClick={() => showToast('Investor deck will be available soon.')}
+        >
+          <Download size={16} aria-hidden="true" /> Request Deck
+        </button>
+        <a href="mailto:investors@hellyeahgames.com" className="btn btn-primary">
+          Contact IR
+        </a>
+      </div>
     </div>
   );
 };
