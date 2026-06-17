@@ -6,7 +6,7 @@ const AboutUs = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: '100vh', padding: '4rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+    <div className="page-shell">
       <button onClick={() => navigate('/')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
         <ArrowLeft size={16} /> Back to Hub
       </button>

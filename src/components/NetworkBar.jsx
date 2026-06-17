@@ -12,45 +12,24 @@ const NetworkBar = () => {
   ];
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '30px',
-      background: '#0a0a0a',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '1.5rem',
-      zIndex: 9999,
-      fontFamily: 'monospace',
-      fontSize: '0.75rem',
-      textTransform: 'uppercase',
-      letterSpacing: '1px'
-    }}>
-      <span style={{ color: '#00ff88', fontWeight: 'bold' }}>NETWORK ONLINE:</span>
-      {links.map((link, i) => (
-        <Fragment key={link.name}>
-          <a 
-            href={link.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-          >
-            {link.name}
-          </a>
-          {i < links.length - 1 && <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>}
-        </Fragment>
-      ))}
-    </div>
+    <nav className="network-bar" aria-label="Empire network links">
+      <div className="network-bar-inner">
+        <span className="network-bar-label">Network Online</span>
+        {links.map((link, i) => (
+          <Fragment key={link.name}>
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="network-bar-link"
+            >
+              {link.name}
+            </a>
+            {i < links.length - 1 && <span className="network-bar-divider" aria-hidden="true">|</span>}
+          </Fragment>
+        ))}
+      </div>
+    </nav>
   );
 };
 

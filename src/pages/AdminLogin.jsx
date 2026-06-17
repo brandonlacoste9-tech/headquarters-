@@ -63,7 +63,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+    <div className="auth-page" style={{ overflow: 'hidden' }}>
       
       {/* Grid Background */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'linear-gradient(rgba(255, 42, 42, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 42, 42, 0.05) 1px, transparent 1px)', backgroundSize: '40px 40px', zIndex: -1 }}></div>

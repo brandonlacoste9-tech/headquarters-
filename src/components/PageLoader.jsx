@@ -1,15 +1,7 @@
 const PageLoader = () => (
-  <div style={{
-    minHeight: '50vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'var(--text-muted)',
-    fontFamily: 'var(--font-heading)',
-    letterSpacing: '2px',
-    textTransform: 'uppercase',
-  }}>
-    Loading...
+  <div className="page-loader" role="status" aria-label="Loading page">
+    <div className="page-loader-ring" />
+    <span className="page-loader-text">Initializing</span>
   </div>
 );
 

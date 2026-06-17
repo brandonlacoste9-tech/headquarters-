@@ -4,6 +4,7 @@ import Hub from './pages/Hub';
 import NetworkBar from './components/NetworkBar';
 import EmpireBar from './components/EmpireBar';
 import PageLoader from './components/PageLoader';
+import ScrollToTop from './components/ScrollToTop';
 import useKonamiCode from './hooks/useKonamiCode';
 
 const Terminal = lazy(() => import('./pages/Terminal'));
@@ -52,10 +53,11 @@ function App() {
   };
 
   return (
-    <div className={isGlitching ? 'glitch-active' : ''}>
+    <div className={`app-shell ${isGlitching ? 'glitch-active' : ''}`}>
+      <NetworkBar />
       <EmpireBar />
       <BrowserRouter>
-        <NetworkBar />
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Hub />} />
