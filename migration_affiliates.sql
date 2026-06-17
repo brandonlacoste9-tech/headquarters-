@@ -12,30 +12,8 @@ CREATE TABLE IF NOT EXISTS public.referrals (
 -- 3. Enable RLS on referrals
 ALTER TABLE public.referrals ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view referrals they are involved in" 
-ON public.referrals FOR SELECT 
+CREATE POLICY "Users can view referrals they are involved in"
+ON public.referrals FOR SELECT
 USING (auth.uid() = referrer_id OR auth.uid() = referred_id);
 
--- 4. Create an RPC function to safely process a new referral
--- This runs with SECURITY DEFINER so it bypasses RLS to grant the referrer their points
-CREATE OR REPLACE FUNCTION public.process_referral(referrer uuid)
-RETURNS void
-LANGUAGE plpgsql
-SECURITY DEFINER
-AS $$
-BEGIN
-  -- Check if this user was already referred by someone else
-  IF EXISTS (SELECT 1 FROM public.referrals WHERE referred_id = auth.uid()) THEN
-    RETURN;
-  END IF;
-
-  -- Insert the referral record
-  INSERT INTO public.referrals (referrer_id, referred_id)
-  VALUES (referrer, auth.uid());
-
-  -- Reward the referrer with 500 Empire Points!
-  UPDATE public.profiles 
-  SET empire_points = COALESCE(empire_points, 0) + 500 
-  WHERE id = referrer;
-END;
-$$;
+-- 4. Referral RPC is defined in migration_passport.sql (run that migration after this one).

@@ -31,15 +31,17 @@ const EmpireLogin = () => {
         });
         if (error) throw error;
 
-        // Process any pending referrals
         const ref = sessionStorage.getItem('empire_ref');
-        if (ref) {
-          try {
-            await supabase.rpc('process_referral', { referrer: ref });
-            sessionStorage.removeItem('empire_ref');
-          } catch (rpcError) {
+        const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (ref && uuidPattern.test(ref)) {
+          const { error: rpcError } = await supabase.rpc('process_referral', { referrer: ref });
+          if (rpcError) {
             console.error('Referral failed:', rpcError);
+          } else {
+            sessionStorage.removeItem('empire_ref');
           }
+        } else if (ref) {
+          sessionStorage.removeItem('empire_ref');
         }
 
         navigate('/');

@@ -21,7 +21,7 @@ const AdminLogin = () => {
           .single();
         
         if (profile && profile.role === 'admin') {
-          navigate('/godmode');
+          navigate('/god-mode');
         }
       }
     };
@@ -53,7 +53,7 @@ const AdminLogin = () => {
         .single();
 
       if (profile && profile.role === 'admin') {
-        navigate('/godmode');
+        navigate('/god-mode');
       } else {
         await supabase.auth.signOut();
         setError("Unauthorized: You do not possess God Mode clearance.");

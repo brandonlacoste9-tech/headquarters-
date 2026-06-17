@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Server, Shield, Cpu, Activity, Briefcase } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { supabase } from '../supabase';
+import { supabase } from '../supabaseClient';
 import { useAuth } from '../context/AuthContext';
 
 const Hub = () => {
@@ -329,7 +329,7 @@ const Hub = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Company</h4>
-            <Link to="/about" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>About Us</Link>
+            <Link to="/about-us" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>About Us</Link>
             <Link to="/careers" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Careers (142)</Link>
             <Link to="/investors" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Investor Relations</Link>
             <Link to="/press" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Press & Media</Link>
@@ -346,7 +346,7 @@ const Hub = () => {
             <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Sysadmin</h4>
             <Link to="/admin" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Admin Portal</Link>
             <Link to="/terminal" style={{ color: 'var(--iron-color)', fontSize: '0.9rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Terminal size={14}/> Mainframe Access</Link>
-            <Link to="/godmode" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>God Mode</Link>
+            <Link to="/god-mode" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>God Mode</Link>
           </div>
         </div>
         

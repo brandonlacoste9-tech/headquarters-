@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://eurrfbiavliahmhdxybp.supabase.co';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'REDACTED_ANON_KEY';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
 
 const EmpireAdBanner = () => {
   const [ad, setAd] = useState(null);
@@ -13,45 +8,37 @@ const EmpireAdBanner = () => {
   useEffect(() => {
     const checkProAndFetchAd = async () => {
       try {
-        // 1. Check if user is PRO
         const { data: { session } } = await supabase.auth.getSession();
-        if (session && session.user) {
+        if (session?.user) {
           const { data: profile } = await supabase
             .from('profiles')
             .select('plan')
             .eq('id', session.user.id)
             .single();
-            
-          if (profile && profile.plan === 'PRO') {
+
+          if (profile?.plan === 'PRO') {
             setIsPro(true);
-            return; // Exit early, do not fetch ads
+            return;
           }
         }
 
-        // 2. Fetch a random active ad from the ad_campaigns table
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/ad_campaigns?active=eq.true&select=*`, {
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          }
-        });
-        const ads = await response.json();
-        
+        const { data: ads, error } = await supabase
+          .from('ad_campaigns')
+          .select('*')
+          .eq('active', true);
+
+        if (error) throw error;
+
         if (ads && ads.length > 0) {
-          // Pick a random ad
           const selectedAd = ads[Math.floor(Math.random() * ads.length)];
           setAd(selectedAd);
-          
-          // 2. Track Impression
-          fetch(`${SUPABASE_URL}/rest/v1/rpc/track_ad_event`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ ad_id: selectedAd.id, event_type: 'impression' })
-          }).catch(console.error);
+
+          supabase.rpc('track_ad_event', {
+            ad_id: selectedAd.id,
+            event_type: 'impression',
+          }).then(({ error: trackError }) => {
+            if (trackError) console.error('Failed to track impression:', trackError);
+          });
         }
       } catch (err) {
         console.error('Failed to load Empire Ad:', err);
@@ -64,16 +51,12 @@ const EmpireAdBanner = () => {
   if (isPro || !ad) return null;
 
   const handleClick = () => {
-    // 3. Track Click
-    fetch(`${SUPABASE_URL}/rest/v1/rpc/track_ad_event`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ad_id: ad.id, event_type: 'click' })
-    }).catch(console.error);
+    supabase.rpc('track_ad_event', {
+      ad_id: ad.id,
+      event_type: 'click',
+    }).then(({ error }) => {
+      if (error) console.error('Failed to track click:', error);
+    });
   };
 
   return (
@@ -101,18 +84,18 @@ const EmpireAdBanner = () => {
       }}>
         Sponsored by The Empire
       </div>
-      
-      <a 
-        href={ad.target_url} 
-        target="_blank" 
-        rel="noopener noreferrer" 
+
+      <a
+        href={ad.target_url}
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleClick}
         style={{ display: 'flex', textDecoration: 'none', color: 'inherit', alignItems: 'center' }}
       >
-        <img 
-          src={ad.image_url} 
-          alt={ad.title} 
-          style={{ width: '120px', height: '90px', objectFit: 'cover' }} 
+        <img
+          src={ad.image_url}
+          alt={ad.title}
+          style={{ width: '120px', height: '90px', objectFit: 'cover' }}
         />
         <div style={{ padding: '0 20px', flex: 1 }}>
           <h3 style={{ margin: '0 0 5px 0', color: '#fff', fontSize: '1.2rem' }}>{ad.title}</h3>

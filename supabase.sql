@@ -15,8 +15,13 @@ create policy "Allow anonymous inserts" on waitlist
   to anon
   with check (true);
 
--- Only allow authenticated admin to read
-create policy "Allow authenticated admin read" on waitlist
+-- Only admins can read the waitlist
+create policy "Allow admin read" on waitlist
   for select
   to authenticated
-  using (true);
+  using (
+    exists (
+      select 1 from public.profiles
+      where id = auth.uid() and role = 'admin'
+    )
+  );

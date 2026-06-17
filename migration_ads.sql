@@ -18,16 +18,25 @@ CREATE POLICY "Active ads are viewable by everyone."
 ON public.ad_campaigns FOR SELECT
 USING (active = true);
 
--- 4. Create an RPC to safely increment impressions and clicks without granting raw UPDATE access
+-- 4. RPC to safely increment impressions and clicks
 CREATE OR REPLACE FUNCTION public.track_ad_event(ad_id uuid, event_type text)
 RETURNS void
 LANGUAGE plpgsql
 SECURITY DEFINER
+SET search_path = public
 AS $$
 BEGIN
+  IF event_type NOT IN ('impression', 'click') THEN
+    RETURN;
+  END IF;
+
+  IF NOT EXISTS (SELECT 1 FROM public.ad_campaigns WHERE id = ad_id AND active = true) THEN
+    RETURN;
+  END IF;
+
   IF event_type = 'impression' THEN
     UPDATE public.ad_campaigns SET impressions = impressions + 1 WHERE id = ad_id;
-  ELSIF event_type = 'click' THEN
+  ELSE
     UPDATE public.ad_campaigns SET clicks = clicks + 1 WHERE id = ad_id;
   END IF;
 END;

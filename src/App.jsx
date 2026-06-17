@@ -24,7 +24,8 @@ function App() {
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get('ref');
-    if (ref) {
+    const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (ref && uuidPattern.test(ref)) {
       sessionStorage.setItem('empire_ref', ref);
     }
   }, []);
