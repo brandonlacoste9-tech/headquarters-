@@ -8,7 +8,7 @@ const NetworkBar = () => {
     { name: "Kryptotrac", url: import.meta.env.VITE_KRYPTOTRAC_URL || "https://www.kryptotrac.com" },
     { name: "Iron Claw", url: import.meta.env.VITE_IRON_CLAW_URL || "https://www.ironclaw.ca" },
     { name: "Gamer Gurls", url: import.meta.env.VITE_GAMER_GURLS_URL || "https://gamergurls.com" },
-    { name: "Hacker Media", url: import.meta.env.VITE_HACKER_MEDIA_URL || "https://hackermedia.ca" },
+    { name: "Hacker Media", url: import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.fun" },
   ];
 
   return (

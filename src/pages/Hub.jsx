@@ -101,7 +101,7 @@ const Hub = () => {
   const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://www.ironclaw.ca";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "https://www.kryptotrac.com";
   const cyborgUrl = import.meta.env.VITE_CYBORG_URL || "https://cyborggamers.com";
-  const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.ca";
+  const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.fun";
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

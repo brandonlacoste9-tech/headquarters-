@@ -51,7 +51,7 @@ async function sendNewsletter() {
           <h2 style="color: #00ff00; margin-top: 0;">📰 Top Tech Story</h2>
           <h3 style="margin-bottom: 5px;">AI Agents Now Writing Full Applications</h3>
           <p style="color: #aaa; margin-top: 0;">The landscape of software development is fundamentally shifting as autonomous agents reach AGI-level logic pathways.</p>
-          <a href="https://hackermedia.com" style="display: inline-block; background: #00ff00; color: #000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Read More</a>
+          <a href="https://www.hackermedia.fun" style="display: inline-block; background: #00ff00; color: #000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Read More</a>
         </div>
 
         <div style="background: #111; padding: 15px; border-left: 4px solid #f7931a; margin-bottom: 20px;">
