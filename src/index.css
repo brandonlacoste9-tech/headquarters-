@@ -29,6 +29,7 @@ body {
   line-height: 1.5;
   overflow-x: hidden;
   background-image: 
+    url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M60 25c-19.3 0-35 15.7-35 35s15.7 35 35 35 35-15.7 35-35-15.7-35-35-35zm0 50c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z'/%3E%3Cpath d='M58 20v-8h4v8h-4zm0 80v8h4v-8h-4zm40-40h8v4h-8v-4zM14 60H6v4h8v-4zm15.3-27.7l-5.6-5.6 2.8-2.8 5.6 5.6-2.8 2.8zm56.6 56.6l5.6 5.6-2.8 2.8-5.6-5.6 2.8-2.8zm-71.9 0l-5.6 5.6 2.8 2.8 5.6-5.6-2.8-2.8zm56.6-56.6l5.6-5.6 2.8 2.8-5.6 5.6-2.8-2.8z'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(circle at 15% 50%, rgba(255, 42, 42, 0.05), transparent 25%),
     radial-gradient(circle at 85% 30%, rgba(0, 179, 255, 0.05), transparent 25%),
     radial-gradient(circle at 50% 80%, rgba(0, 255, 136, 0.05), transparent 25%);
