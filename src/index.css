@@ -15,6 +15,9 @@
   --font-heading: 'Outfit', 'Inter', sans-serif;
 
   --network-bar-height: 32px;
+  --empire-bar-height: 44px;
+  --sticky-offset: calc(var(--network-bar-height) + var(--empire-bar-height));
+  --godmode-accent: #ff2a2a;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -715,6 +718,10 @@ img {
   to { transform: rotate(360deg); }
 }
 
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
 .page-loader-text {
   color: var(--text-muted);
   font-family: var(--font-heading);
@@ -809,6 +816,375 @@ img {
   color: #fff;
 }
 
+/* God Mode dashboard */
+.godmode-page {
+  min-height: calc(100vh - var(--sticky-offset));
+  display: flex;
+  flex-direction: column;
+}
+
+.godmode-header {
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 42, 42, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: sticky;
+  top: var(--sticky-offset);
+  z-index: 100;
+}
+
+.godmode-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.godmode-pulse {
+  width: 10px;
+  height: 10px;
+  background: var(--godmode-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--godmode-accent);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.godmode-title {
+  font-family: var(--font-heading);
+  color: var(--godmode-accent);
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.godmode-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.godmode-body {
+  padding: 2.5rem 0 4rem;
+  flex-grow: 1;
+}
+
+.godmode-intro h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.godmode-intro p {
+  color: var(--text-secondary);
+}
+
+.godmode-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.godmode-stat-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.godmode-stat-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  transform: translate(30%, -30%);
+  pointer-events: none;
+}
+
+.godmode-stat-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.godmode-stat-value {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-family: var(--font-heading);
+  font-weight: 900;
+  color: #fff;
+}
+
+.godmode-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.godmode-panel {
+  padding: 1.75rem;
+}
+
+.godmode-panel-title {
+  font-family: var(--font-heading);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.godmode-chart {
+  height: 320px;
+}
+
+.godmode-feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.godmode-live-badge {
+  font-size: 0.7rem;
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--iron-color);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.godmode-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 380px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.godmode-feed-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--krypto-color);
+  transition: background var(--transition-fast);
+}
+
+.godmode-feed-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.godmode-feed-item.is-pro {
+  border-left-color: #ffb300;
+}
+
+.godmode-feed-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.godmode-feed-time {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-family: monospace;
+  margin-top: 0.15rem;
+}
+
+.godmode-plan-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.godmode-plan-badge.free {
+  background: rgba(0, 179, 255, 0.12);
+  color: var(--krypto-color);
+}
+
+.godmode-plan-badge.pro {
+  background: rgba(255, 179, 0, 0.12);
+  color: #ffb300;
+}
+
+.godmode-empty {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.btn-godmode {
+  background: transparent;
+  border: 1px solid var(--godmode-accent);
+  color: var(--godmode-accent);
+}
+
+.btn-godmode:hover {
+  background: rgba(255, 42, 42, 0.1);
+}
+
+/* CRT Terminal */
+.terminal-page {
+  position: fixed;
+  top: var(--sticky-offset);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #030303;
+  color: #33ff33;
+  font-family: 'Consolas', 'Courier New', monospace;
+  padding: 1.5rem;
+  overflow-y: auto;
+  text-shadow: 0 0 6px rgba(51, 255, 51, 0.35);
+}
+
+.terminal-scanlines {
+  position: fixed;
+  top: var(--sticky-offset);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.terminal-vignette {
+  position: fixed;
+  top: var(--sticky-offset);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.terminal-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+}
+
+.terminal-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(51, 255, 51, 0.15);
+  font-size: 0.8rem;
+  color: rgba(51, 255, 51, 0.6);
+}
+
+.terminal-back {
+  color: rgba(51, 255, 51, 0.7);
+  background: none;
+  border: 1px solid rgba(51, 255, 51, 0.25);
+  padding: 0.35rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.terminal-back:hover {
+  color: #33ff33;
+  border-color: rgba(51, 255, 51, 0.5);
+}
+
+.terminal-line {
+  margin-bottom: 0.25rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-line.prompt {
+  color: #66ff66;
+}
+
+.terminal-line.error {
+  color: #ff5555;
+  text-shadow: 0 0 6px rgba(255, 85, 85, 0.4);
+}
+
+.terminal-line.warn {
+  color: #ffff55;
+}
+
+.terminal-line.dim {
+  color: rgba(51, 255, 51, 0.55);
+}
+
+.terminal-line.system {
+  color: #55ffff;
+}
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.terminal-prompt-char {
+  color: #33ff33;
+  flex-shrink: 0;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #33ff33;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  caret-color: #33ff33;
+  text-shadow: 0 0 6px rgba(51, 255, 51, 0.35);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  background: #33ff33;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: terminal-blink 1s step-end infinite;
+}
+
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* Konami Glitch Effect */
 @keyframes globalGlitch {
   0% { filter: invert(0) hue-rotate(0deg); transform: translate(0); }
@@ -851,6 +1227,14 @@ img {
 
   .hub-header {
     top: calc(var(--network-bar-height) + 52px);
+  }
+
+  .godmode-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .godmode-chart {
+    height: 260px;
   }
 }
 
@@ -905,5 +1289,10 @@ img {
 
   .platform-card:hover {
     transform: none;
+  }
+
+  .terminal-cursor,
+  .godmode-pulse {
+    animation: none;
   }
 }
