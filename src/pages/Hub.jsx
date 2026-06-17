@@ -100,6 +100,7 @@ const Hub = () => {
   const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "https://gamergurls.com";
   const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://www.ironclaw.ca";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "https://www.kryptotrac.com";
+  const cyborgUrl = import.meta.env.VITE_CYBORG_URL || "https://cyborggamers.com";
   const hackerMediaUrl = import.meta.env.VITE_HACKER_MEDIA_URL || "https://www.hackermedia.ca";
 
   return (
@@ -253,9 +254,9 @@ const Hub = () => {
           />
 
           <PlatformCard 
-            title="The Arcade"
+            title="Cyborg Gamers"
             description="Our flagship premium gaming subscription service. 800+ ad-free HTML5 games available everywhere."
-            url={arcadeUrl} 
+            url={cyborgUrl} 
             banner="/assets/banner_cyborg.jpg"
             color="var(--arcade-color)"
             delay="delay-1"
@@ -380,7 +381,7 @@ const Hub = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h4 style={{ color: '#fff', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Platforms</h4>
             <a href="https://hellyeah-games.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Hell Yeah Games</a>
-            <a href={arcadeUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>The Arcade</a>
+            <a href={cyborgUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Cyborg Gamers</a>
             <a href={kryptotracUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Kryptotrac</a>
             <a href={ironClawUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Iron Claw</a>
             <a href={gamerGurlsUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Gamer Gurls</a>
