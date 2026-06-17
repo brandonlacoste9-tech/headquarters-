@@ -300,68 +300,7 @@ const Hub = () => {
 
         </div>
 
-        {/* Global Infrastructure Section */}
-        <div style={{ marginTop: '8rem', textAlign: 'left', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '6rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-            <Globe size={24} color="#00b3ff" />
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#fff', textTransform: 'uppercase' }}>Global Infrastructure Network</h2>
-          </div>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '800px' }}>
-            Our proprietary edge-delivery network ensures sub-20ms latency across 4 continents. 99.999% guaranteed uptime for enterprise partners and millions of concurrent users.
-          </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-            {[
-              { region: 'US East (N. Virginia)', status: 'Operational', ping: '12ms' },
-              { region: 'US West (Oregon)', status: 'Operational', ping: '14ms' },
-              { region: 'EU Central (Frankfurt)', status: 'Operational', ping: '18ms' },
-              { region: 'AP Northeast (Tokyo)', status: 'Operational', ping: '22ms' },
-              { region: 'SA East (São Paulo)', status: 'Operational', ping: '25ms' },
-            ].map(node => (
-              <div key={node.region} className="glass-panel" style={{ padding: '1.5rem', borderLeft: '3px solid #00ff88' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>Datacenter</div>
-                <div style={{ color: '#fff', fontWeight: 'bold', marginBottom: '1rem' }}>{node.region}</div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.9rem' }}>
-                  <span style={{ color: '#00ff88', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <div style={{ width: '8px', height: '8px', background: '#00ff88', borderRadius: '50%', boxShadow: '0 0 10px #00ff88' }}></div> {node.status}
-                  </span>
-                  <span style={{ color: 'var(--text-muted)' }}>{node.ping}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Careers Section */}
-        <div style={{ marginTop: '8rem', textAlign: 'left', background: 'rgba(255,255,255,0.02)', padding: '4rem', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-            <Briefcase size={24} color="#ff2a2a" />
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', color: '#fff', textTransform: 'uppercase' }}>Join The Empire</h2>
-          </div>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '800px' }}>
-            With over 1,200 engineers across 14 global offices, we are constantly expanding. Help us build the next generation of financial, gaming, and developer infrastructure.
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {[
-              { role: 'Principal Blockchain Architect', dept: 'Kryptotrac Core', loc: 'New York, NY / Hybrid' },
-              { role: 'Senior Engine Programmer', dept: 'The Arcade', loc: 'London, UK / Remote' },
-              { role: 'VP of Cybersecurity', dept: 'Iron Claw Labs', loc: 'San Francisco, CA' },
-              { role: 'Data Scientist (Machine Learning)', dept: 'Global Infrastructure', loc: 'Toronto, ON' },
-            ].map(job => (
-              <div key={job.role} onClick={() => navigate('/careers')} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 2rem', background: 'rgba(0,0,0,0.4)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.02)', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'} onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.4)'}>
-                <div>
-                  <div style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.2rem' }}>{job.role}</div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{job.dept} • {job.loc}</div>
-                </div>
-                <button className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem', borderRadius: '4px' }}>Apply Now</button>
-              </div>
-            ))}
-          </div>
-          <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-            <Link to="/careers" style={{ color: 'var(--text-secondary)', textDecoration: 'underline' }}>View all 142 open positions</Link>
-          </div>
-        </div>
 
       </div>
 
