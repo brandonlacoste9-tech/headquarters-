@@ -28,7 +28,7 @@ const EmpireBar = () => {
       <a href="https://gamergurls.com" style={{ color: '#ff00ff', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
         <span>💅</span> GAMER GURLS
       </a>
-      <a href="https://kryptotrac.com" style={{ color: '#f7931a', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
+      <a href="https://www.kryptotrac.com" style={{ color: '#f7931a', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
         <span>📈</span> KRYPTOTRAC
       </a>
       <a href="https://www.ironclaw.ca" style={{ color: '#00ffaa', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>

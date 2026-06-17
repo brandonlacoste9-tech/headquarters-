@@ -58,7 +58,7 @@ async function sendNewsletter() {
           <h2 style="color: #f7931a; margin-top: 0;">📈 Crypto Pulse</h2>
           <h3 style="margin-bottom: 5px;">Bitcoin surges past $120k</h3>
           <p style="color: #aaa; margin-top: 0;">Institutional accumulation continues despite retail fear.</p>
-          <a href="https://kryptotrac.com" style="display: inline-block; background: #f7931a; color: #000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">View Charts</a>
+          <a href="https://www.kryptotrac.com" style="display: inline-block; background: #f7931a; color: #000; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">View Charts</a>
         </div>
 
         <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 12px;">
