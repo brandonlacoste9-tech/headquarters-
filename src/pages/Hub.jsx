@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Server, Shield, Cpu, Activity, Briefcase } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
-import EmpireAnalytics from '../components/EmpireAnalytics';
+
 import { supabase } from '../supabase';
 import { useAuth } from '../context/AuthContext';
 
@@ -238,7 +238,7 @@ const Hub = () => {
         </div>
       </div>
 
-      <EmpireAnalytics />
+
 
       <div className="container" style={{ paddingTop: '4rem', paddingBottom: '6rem', textAlign: 'center' }}>
         {/* The 4 Pillars */}
