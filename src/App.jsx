@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Hub from './pages/Hub';
 import AdminLogin from './pages/AdminLogin';
@@ -18,10 +18,10 @@ import EmpireLogin from './pages/EmpireLogin';
 
 function App() {
   const isKonamiUnlocked = useKonamiCode();
-  const [isGlitching, setIsGlitching] = React.useState(false);
-  const [showGame, setShowGame] = React.useState(false);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const [showGame, setShowGame] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get('ref');
     const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -30,16 +30,19 @@ function App() {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (isKonamiUnlocked && !showGame) {
-      setIsGlitching(true);
-      // Glitch out for 2 seconds before showing the game
-      const timer = setTimeout(() => {
-        setIsGlitching(false);
-        setShowGame(true);
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
+  useEffect(() => {
+    if (!isKonamiUnlocked || showGame) return;
+
+    const glitchTimer = setTimeout(() => setIsGlitching(true), 0);
+    const showTimer = setTimeout(() => {
+      setIsGlitching(false);
+      setShowGame(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(glitchTimer);
+      clearTimeout(showTimer);
+    };
   }, [isKonamiUnlocked, showGame]);
 
   const handleCloseGame = () => {

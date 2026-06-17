@@ -1,8 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { Users, CreditCard, Activity, Database, LogOut, ArrowUpRight } from 'lucide-react';
+import { Users, CreditCard, Activity, Database, LogOut } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+const StatCard = ({ title, value, icon, color }) => (
+  <div className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', top: 0, right: 0, width: '100px', height: '100px', background: `radial-gradient(circle, ${color}33 0%, transparent 70%)`, transform: 'translate(30%, -30%)' }}></div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--text-muted)' }}>
+      {icon}
+      <span style={{ textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem', fontWeight: 'bold' }}>{title}</span>
+    </div>
+    <div style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)', fontWeight: 900, color: '#fff' }}>
+      {value}
+    </div>
+  </div>
+);
 
 const GodMode = () => {
   const navigate = useNavigate();
@@ -96,19 +109,6 @@ const GodMode = () => {
     return <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '2rem' }}>INITIALIZING GOD MODE...</div>;
   }
 
-  const StatCard = ({ title, value, icon, color }) => (
-    <div className="glass-panel" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: 0, right: 0, width: '100px', height: '100px', background: `radial-gradient(circle, ${color}33 0%, transparent 70%)`, transform: 'translate(30%, -30%)' }}></div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', color: 'var(--text-muted)' }}>
-        {icon}
-        <span style={{ textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem', fontWeight: 'bold' }}>{title}</span>
-      </div>
-      <div style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)', fontWeight: 900, color: '#fff' }}>
-        {value}
-      </div>
-    </div>
-  );
-
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
@@ -175,7 +175,7 @@ const GodMode = () => {
             </h3>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto', flexGrow: 1 }}>
-              {stats.recentSignups.map((user, i) => (
+              {stats.recentSignups.map((user) => (
                 <div key={user.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'rgba(0,0,0,0.4)', borderRadius: '8px', borderLeft: `2px solid ${user.plan === 'PRO' ? '#ffb300' : '#00b3ff'}` }}>
                   <div>
                     <div style={{ color: '#fff', fontWeight: 'bold' }}>{user.username || 'Anonymous'}</div>

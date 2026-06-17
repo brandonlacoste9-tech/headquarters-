@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ArrowLeft, Scale } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 

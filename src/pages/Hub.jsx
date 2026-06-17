@@ -1,9 +1,64 @@
-import React, { useState } from 'react';
-import { ExternalLink, Gamepad2, TrendingUp, Terminal, ChevronRight, Globe, Server, Shield, Cpu, Activity, Briefcase } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ExternalLink, TrendingUp, Terminal, Shield } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { supabase } from '../supabaseClient';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
+
+const PlatformCard = ({ title, description, url, banner, color, delay }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`glass-panel animate-fade-in ${delay}`}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      textDecoration: 'none',
+      color: 'inherit',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer',
+      position: 'relative',
+      overflow: 'hidden',
+      border: '1px solid rgba(255,255,255,0.05)',
+      padding: 0
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-10px)';
+      e.currentTarget.style.borderColor = color;
+      e.currentTarget.style.boxShadow = `0 10px 40px ${color}33`;
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0)';
+      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
+      e.currentTarget.style.boxShadow = 'none';
+    }}
+  >
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '4px',
+      background: color,
+      zIndex: 2
+    }} />
+
+    <div style={{ width: '100%', height: '200px', overflow: 'hidden', position: 'relative' }}>
+      <img src={banner} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '100px', background: 'linear-gradient(to top, rgba(10,10,20,1), transparent)' }}></div>
+    </div>
+
+    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+      <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', marginBottom: '1rem', color: '#fff' }}>{title}</h2>
+      <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem', flexGrow: 1, lineHeight: 1.6 }}>{description}</p>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: color, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>
+        Launch Platform <ExternalLink size={16} />
+      </div>
+    </div>
+  </a>
+);
 
 const Hub = () => {
   const navigate = useNavigate();
@@ -12,7 +67,7 @@ const Hub = () => {
   const [waitlistStatus, setWaitlistStatus] = useState(''); // 'idle', 'loading', 'success', 'error'
   const [empirePoints, setEmpirePoints] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       supabase.from('profiles').select('empire_points').eq('id', user.id).single().then(({data}) => {
         if (data) setEmpirePoints(data.empire_points || 0);
@@ -40,63 +95,6 @@ const Hub = () => {
     }
   };
 
-  const PlatformCard = ({ title, description, url, banner, color, delay }) => (
-    <a 
-      href={url} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className={`glass-panel animate-fade-in ${delay}`}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        textDecoration: 'none',
-        color: 'inherit',
-        transition: 'all 0.3s ease',
-        cursor: 'pointer',
-        position: 'relative',
-        overflow: 'hidden',
-        border: `1px solid rgba(255,255,255,0.05)`,
-        padding: 0
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-10px)';
-        e.currentTarget.style.borderColor = color;
-        e.currentTarget.style.boxShadow = `0 10px 40px ${color}33`;
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)';
-        e.currentTarget.style.boxShadow = 'none';
-      }}
-    >
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '4px',
-        background: color,
-        zIndex: 2
-      }} />
-      
-      <div style={{ width: '100%', height: '200px', overflow: 'hidden', position: 'relative' }}>
-        <img src={banner} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '100px', background: 'linear-gradient(to top, rgba(10,10,20,1), transparent)' }}></div>
-      </div>
-
-      <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-        <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', marginBottom: '1rem', color: '#fff' }}>{title}</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem', flexGrow: 1, lineHeight: 1.6 }}>{description}</p>
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: color, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>
-          Launch Platform <ExternalLink size={16} />
-        </div>
-      </div>
-    </a>
-  );
-
-  // Production URL Environment Variables (with localhost fallbacks for dev)
-  const arcadeUrl = import.meta.env.VITE_ARCADE_URL || "https://hellyeah-games.com";
   const gamerGurlsUrl = import.meta.env.VITE_GAMER_GURLS_URL || "https://gamergurls.com";
   const ironClawUrl = import.meta.env.VITE_IRON_CLAW_URL || "https://www.ironclaw.ca";
   const kryptotracUrl = import.meta.env.VITE_KRYPTOTRAC_URL || "https://www.kryptotrac.com";

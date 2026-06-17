@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ArrowLeft, Briefcase, MapPin, DollarSign } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

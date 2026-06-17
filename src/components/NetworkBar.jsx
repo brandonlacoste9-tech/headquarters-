@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 const NetworkBar = () => {
   const links = [
@@ -32,7 +32,7 @@ const NetworkBar = () => {
     }}>
       <span style={{ color: '#00ff88', fontWeight: 'bold' }}>NETWORK ONLINE:</span>
       {links.map((link, i) => (
-        <React.Fragment key={i}>
+        <Fragment key={link.name}>
           <a 
             href={link.url} 
             target="_blank" 
@@ -48,7 +48,7 @@ const NetworkBar = () => {
             {link.name}
           </a>
           {i < links.length - 1 && <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   );

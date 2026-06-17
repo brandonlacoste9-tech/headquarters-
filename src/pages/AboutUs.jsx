@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ArrowLeft, Building2, Globe2, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

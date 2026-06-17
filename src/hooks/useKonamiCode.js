@@ -1,37 +1,34 @@
 import { useState, useEffect } from 'react';
 
-const useKonamiCode = () => {
-  const [sequence, setSequence] = useState([]);
-  const [isUnlocked, setIsUnlocked] = useState(false);
+const KONAMI_CODE = [
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a',
+];
 
-  // Up, Up, Down, Down, Left, Right, Left, Right, B, A
-  const konamiCode = [
-    'ArrowUp',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowDown',
-    'ArrowLeft',
-    'ArrowRight',
-    'ArrowLeft',
-    'ArrowRight',
-    'b',
-    'a'
-  ];
+const useKonamiCode = () => {
+  const [, setSequence] = useState([]);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key;
-      
+
       setSequence((prev) => {
         const newSequence = [...prev, key];
-        
-        // Keep only the last N keystrokes
-        if (newSequence.length > konamiCode.length) {
+
+        if (newSequence.length > KONAMI_CODE.length) {
           newSequence.shift();
         }
 
-        // Check if it matches
-        if (newSequence.join(',').toLowerCase() === konamiCode.join(',').toLowerCase()) {
+        if (newSequence.join(',').toLowerCase() === KONAMI_CODE.join(',').toLowerCase()) {
           setIsUnlocked(true);
         }
 
@@ -44,7 +41,7 @@ const useKonamiCode = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [konamiCode]);
+  }, []);
 
   return isUnlocked;
 };

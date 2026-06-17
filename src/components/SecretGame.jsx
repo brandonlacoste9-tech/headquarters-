@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 
 const GRID_SIZE = 20;
@@ -72,14 +72,14 @@ const SecretGame = ({ onClose }) => {
       // Eat food
       if (newHead.x === food.x && newHead.y === food.y) {
         setScore(s => s + 100);
-        let newFood;
-        while (true) {
+        let newFood = { x: 0, y: 0 };
+        let isValidFood = false;
+        while (!isValidFood) {
           newFood = {
             x: Math.floor(Math.random() * GRID_SIZE),
-            y: Math.floor(Math.random() * GRID_SIZE)
+            y: Math.floor(Math.random() * GRID_SIZE),
           };
-          // eslint-disable-next-line no-loop-func
-          if (!newSnake.some(s => s.x === newFood.x && s.y === newFood.y)) break;
+          isValidFood = !newSnake.some((segment) => segment.x === newFood.x && segment.y === newFood.y);
         }
         setFood(newFood);
       } else {
